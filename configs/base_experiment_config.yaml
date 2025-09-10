@@ -1,0 +1,59 @@
+# Base Experiment Configuration
+# This file contains shared settings for all VPR algorithms
+
+# Dataset configuration
+train_csv: "data/train_dataset.csv"
+test_csv: "data/test_dataset.csv"
+train_base_path: "data/train_images/"
+test_base_path: "data/test_images/"
+
+# GPS filtering settings
+camera_filter: "all"  # Options: "all", "front", "rear", "left", "right"
+positive_threshold: 25  # meters - images within this distance are considered positive matches
+negative_threshold: 200  # meters - images beyond this distance are considered negative
+
+# Training settings
+batch_size: 16
+num_epochs: 50
+learning_rate: 0.001
+num_workers: 4
+device: "cuda"
+
+# Evaluation settings
+recall_k_values: [1, 5, 10, 20]
+distance_threshold: 25  # meters for evaluation
+
+# Algorithm-specific settings (optional overrides)
+algorithm_settings:
+  netvlad:
+    batch_size: 8
+    num_clusters: 64
+    learning_rate: 0.0001
+  
+  ap-gem:
+    batch_size: 16
+    gem_p: 3.0
+    learning_rate: 0.001
+  
+  delg:
+    batch_size: 8
+    global_dim: 2048
+    local_dim: 128
+    learning_rate: 0.0001
+  
+  cosplace:
+    batch_size: 16
+    learning_rate: 0.001
+  
+  eigenplaces:
+    batch_size: 16
+    learning_rate: 0.001
+
+# Output settings
+save_every_n_epochs: 10
+early_stopping_patience: 10
+log_interval: 100  # Log every N batches
+
+# Hardware settings
+mixed_precision: true
+gradient_accumulation_steps: 1
