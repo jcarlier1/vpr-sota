@@ -7,11 +7,9 @@ This project implements multiple State-of-the-Art (SOTA) Visual Place Recognitio
 ### ✅ Ready for Testing
 - **NetVLAD** (ResNet50 backbone) - Aggregated local descriptors with learnable clustering
 - **AP-GeM** (ResNet101 backbone) - Attention-based pooling with GeM pooling
-
-### 🚧 In Development
-- **DELG** (ResNet50 backbone) - Global + local descriptors for place recognition
-- **CosPlace** (ResNet backbone) - Cosine-based place recognition
-- **EigenPlaces** (ResNet backbone) - Eigenvalue-based place recognition
+- **DELG** (ResNet50 backbone) - Global + local descriptors for enhanced place recognition
+- **CosPlace** (ResNet backbone) - Cosine-based place recognition with multi-scale pooling
+- **EigenPlaces** (ResNet backbone) - Eigenvalue-based features for viewpoint robustness
 
 ## Quick Start
 
@@ -61,7 +59,7 @@ conda activate vpr-sota
 python experiments/run_experiments.py \
     --config configs/base_experiment_config.yaml \
     --output-dir experiments/results \
-    --algorithms netvlad ap-gem
+    --algorithms netvlad ap-gem delg cosplace eigenplaces
 ```
 
 #### Option 3: Run Individual Algorithms
@@ -71,6 +69,15 @@ python algorithms/netvlad/train_netvlad.py --config configs/netvlad_config.yaml
 
 # AP-GeM
 python algorithms/ap-gem/train_apgem.py --config configs/apgem_config.yaml
+
+# DELG
+python algorithms/delg/train_delg.py --config configs/delg_config.yaml
+
+# CosPlace
+python algorithms/cosplace/train_cosplace.py --config configs/cosplace_config.yaml
+
+# EigenPlaces
+python algorithms/eigenplaces/train_eigenplaces.py --config configs/eigenplaces_config.yaml
 ```
 
 ## Configuration
@@ -86,6 +93,9 @@ Edit `configs/base_experiment_config.yaml` to adjust:
 Individual algorithm configs in `configs/`:
 - `netvlad_config.yaml` - NetVLAD clustering and pooling settings
 - `apgem_config.yaml` - AP-GeM attention and pooling parameters
+- `delg_config.yaml` - DELG global/local features and attention settings
+- `cosplace_config.yaml` - CosPlace multi-scale pooling and cosine loss settings
+- `eigenplaces_config.yaml` - EigenPlaces eigenvalue decomposition and viewpoint settings
 
 ## Project Structure
 
@@ -94,9 +104,9 @@ vpr-sota/
 ├── algorithms/              # Algorithm implementations
 │   ├── netvlad/            # NetVLAD implementation
 │   ├── ap-gem/             # AP-GeM implementation
-│   ├── delg/               # DELG implementation (coming soon)
-│   ├── cosplace/           # CosPlace implementation (coming soon)
-│   └── eigenplaces/        # EigenPlaces implementation (coming soon)
+│   ├── delg/               # DELG implementation
+│   ├── cosplace/           # CosPlace implementation
+│   └── eigenplaces/        # EigenPlaces implementation
 ├── datasets/               # Dataset loaders
 │   └── gps_dataset.py      # GPS-based dataset with automatic pair generation
 ├── utils/                  # Utilities
@@ -127,6 +137,9 @@ experiments/results/
 ├── logs/                   # Detailed execution logs
 ├── netvlad/                # NetVLAD model and results
 ├── ap-gem/                 # AP-GeM model and results
+├── delg/                   # DELG model and results
+├── cosplace/               # CosPlace model and results
+├── eigenplaces/            # EigenPlaces model and results
 └── configs/                # Generated algorithm-specific configs
 ```
 
@@ -149,6 +162,24 @@ experiments/results/
 - **Pooling**: Attention-weighted GeM pooling
 - **Features**: 2048-dimensional global descriptors
 - **Loss**: Contrastive loss with triplet mining
+
+### DELG
+- **Backbone**: ResNet50 (pretrained on ImageNet)
+- **Features**: Global (2048-dim) + Local descriptors (128-dim per keypoint)
+- **Attention**: Keypoint detection and selection mechanism
+- **Loss**: Combined global triplet loss + local attention regularization
+
+### CosPlace
+- **Backbone**: ResNet50 (pretrained on ImageNet)
+- **Pooling**: Multi-scale spatial pooling (1x1, 2x2, 4x4)
+- **Features**: 2048-dimensional L2-normalized descriptors
+- **Loss**: Cosine-based triplet or contrastive loss
+
+### EigenPlaces
+- **Backbone**: ResNet50 (pretrained on ImageNet)
+- **Pooling**: Multi-scale eigenvalue decomposition for viewpoint robustness
+- **Features**: 2048-dimensional eigenvalue-based descriptors
+- **Loss**: Viewpoint-aware contrastive loss with eigenvalue regularization
 
 ## Troubleshooting
 
@@ -202,9 +233,9 @@ Contributions are welcome! Please:
 - ✅ **Framework Core**: Dataset loading, evaluation metrics, experiment runner
 - ✅ **NetVLAD**: Complete implementation with training pipeline
 - ✅ **AP-GeM**: Complete implementation with training pipeline
-- 🚧 **DELG**: In development (global + local descriptors)
-- 📋 **CosPlace**: Planned (cosine-based matching)
-- 📋 **EigenPlaces**: Planned (eigenvalue-based features)
+- ✅ **DELG**: Complete implementation with global + local descriptors
+- ✅ **CosPlace**: Complete implementation with multi-scale pooling
+- ✅ **EigenPlaces**: Complete implementation with viewpoint robustness
 
 ---
 

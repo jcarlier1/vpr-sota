@@ -37,7 +37,6 @@ class VPRExperimentRunner:
                 'script': 'algorithms/ap-gem/train_apgem.py',
                 'config': 'configs/apgem_config.yaml'
             },
-            # Future algorithms will be added here
             'delg': {
                 'script': 'algorithms/delg/train_delg.py',
                 'config': 'configs/delg_config.yaml'

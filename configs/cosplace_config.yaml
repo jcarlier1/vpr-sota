@@ -1,0 +1,50 @@
+# CosPlace Configuration
+
+# Model settings
+backbone: "resnet50"
+output_dim: 2048
+pooling_scales: [1, 2, 4]  # Multi-scale pooling
+pretrained: true
+
+# Dataset settings
+train_csv: "data/train_dataset.csv"
+test_csv: "data/test_dataset.csv"
+train_base_path: "data/train_images/"
+test_base_path: "data/test_images/"
+camera_filter: "all"
+image_size: 224
+
+# GPS settings
+positive_threshold: 25  # meters
+negative_threshold: 200  # meters
+
+# Training settings
+batch_size: 16
+num_epochs: 50
+learning_rate: 0.001
+weight_decay: 0.0001
+num_workers: 4
+device: "cuda"
+
+# Loss settings
+loss_type: "triplet"  # "triplet" or "contrastive"
+margin: 0.1
+temperature: 0.07  # For contrastive loss
+
+# Learning rate schedule
+lr_step_size: 20
+lr_gamma: 0.5
+
+# Evaluation settings
+eval_every: 5
+recall_k_values: [1, 5, 10, 20]
+distance_threshold: 25  # meters
+
+# Logging and saving
+log_interval: 100
+save_every_n_epochs: 10
+output_dir: "experiments/cosplace_output"
+
+# Mixed precision training
+mixed_precision: true
+gradient_accumulation_steps: 1

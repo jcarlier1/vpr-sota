@@ -301,6 +301,40 @@ class VPREvaluator:
             metric=self.metric
         )
     
+    def evaluate(
+        self,
+        all_features: np.ndarray,
+        all_locations: List[Tuple[float, float]],
+        distance_metric: str = None
+    ) -> Dict:
+        """
+        Evaluate VPR performance using all features as both query and database.
+        
+        Args:
+            all_features: All feature vectors (N, D)
+            all_locations: All GPS locations [(lat, lon), ...]
+            distance_metric: Distance metric override (optional)
+        
+        Returns:
+            Evaluation results dictionary
+        """
+        # Use override metric if provided, otherwise use default
+        metric = distance_metric if distance_metric is not None else self.metric
+        
+        # Convert locations to numpy array
+        all_gps = np.array(all_locations)
+        
+        # Use all features as both query and database
+        return evaluate_vpr(
+            query_features=all_features,
+            database_features=all_features,
+            query_gps=all_gps,
+            database_gps=all_gps,
+            distance_threshold=self.distance_threshold,
+            k_values=self.k_values,
+            metric=metric
+        )
+    
     def compare_models(
         self,
         model_results: Dict[str, Dict]

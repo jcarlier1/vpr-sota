@@ -52,7 +52,7 @@ fi
 echo ""
 
 # Available algorithms
-ALGORITHMS=("netvlad" "ap-gem")  # Start with implemented algorithms
+ALGORITHMS=("netvlad" "ap-gem" "delg" "cosplace" "eigenplaces")  # All implemented algorithms
 
 # Check which algorithms are available
 AVAILABLE_ALGORITHMS=()
