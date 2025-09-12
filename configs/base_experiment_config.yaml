@@ -2,15 +2,15 @@
 # This file contains shared settings for all VPR algorithms
 
 # Dataset configuration
-train_csv: "data/train_dataset.csv"
-test_csv: "data/test_dataset.csv"
-train_base_path: "data/train_images/"
-test_base_path: "data/test_images/"
+train_csv: "/media/pragyan/Data/racecar_ws/output/sequences/M-SOLO-SLOW-70-100/poses/poses.csv"
+test_csv: "/media/pragyan/Data/racecar_ws/output/sequences/M-MULTI-SLOW-KAIST/poses/poses.csv"
+train_base_path: "/media/pragyan/Data/racecar_ws/output/sequences/M-SOLO-SLOW-70-100/images/"
+test_base_path: "/media/pragyan/Data/racecar_ws/output/sequences/M-MULTI-SLOW-KAIST/images/"
 
 # GPS filtering settings
-camera_filter: "all"  # Options: "all", "front", "rear", "left", "right"
-positive_threshold: 25  # meters - images within this distance are considered positive matches
-negative_threshold: 200  # meters - images beyond this distance are considered negative
+camera_filter: "front_left_center"  # Options: "all", "front", "rear", "left", "right"
+positive_threshold: 5  # meters - images within this distance are considered positive matches
+negative_threshold: 25  # meters - images beyond this distance are considered negative
 
 # Training settings
 batch_size: 16
@@ -20,8 +20,8 @@ num_workers: 4
 device: "cuda"
 
 # Evaluation settings
-recall_k_values: [1, 5, 10, 20]
-distance_threshold: 25  # meters for evaluation
+recall_k_values: [1, 5, 10]
+distance_threshold: 5  # meters for evaluation
 
 # Algorithm-specific settings (optional overrides)
 algorithm_settings:

@@ -7,16 +7,16 @@ eigen_scales: [1, 2, 4]  # Multi-scale eigenvalue decomposition
 pretrained: true
 
 # Dataset settings
-train_csv: "data/train_dataset.csv"
-test_csv: "data/test_dataset.csv"
-train_base_path: "data/train_images/"
-test_base_path: "data/test_images/"
-camera_filter: "all"
+train_csv: "/media/pragyan/Data/racecar_ws/output/sequences/M-SOLO-SLOW-70-100/poses/poses.csv"
+test_csv: "/media/pragyan/Data/racecar_ws/output/sequences/M-MULTI-SLOW-KAIST/poses/poses.csv"
+train_base_path: "/media/pragyan/Data/racecar_ws/output/sequences/M-SOLO-SLOW-70-100/images/"
+test_base_path: "/media/pragyan/Data/racecar_ws/output/sequences/M-MULTI-SLOW-KAIST/images/"
+camera_filter: "front_left_center"
 image_size: 224
 
 # GPS settings
-positive_threshold: 25  # meters
-negative_threshold: 200  # meters
+positive_threshold: 5  # meters
+negative_threshold: 25  # meters
 
 # Training settings
 batch_size: 16
@@ -38,8 +38,8 @@ lr_gamma: 0.5
 
 # Evaluation settings
 eval_every: 5
-recall_k_values: [1, 5, 10, 20]
-distance_threshold: 25  # meters
+recall_k_values: [1, 5, 10]
+distance_threshold: 5  # meters
 
 # Logging and saving
 log_interval: 100
@@ -48,4 +48,8 @@ output_dir: "experiments/eigenplaces_output"
 
 # Mixed precision training
 mixed_precision: true
+gradient_accumulation_steps: 1
+
+# Output settings
+early_stopping_patience: 10
 gradient_accumulation_steps: 1

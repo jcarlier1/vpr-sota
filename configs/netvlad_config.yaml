@@ -3,16 +3,16 @@
 # Dataset paths
 train_csv: "/media/pragyan/Data/racecar_ws/output/sequences/M-SOLO-SLOW-70-100/poses/poses.csv"
 test_csv: "/media/pragyan/Data/racecar_ws/output/sequences/M-MULTI-SLOW-KAIST/poses/poses.csv"
-train_base_path: "/media/pragyan/Data/racecar_ws/output/sequences/M-SOLO-SLOW-70-100"
-test_base_path: "/media/pragyan/Data/racecar_ws/output/sequences/M-MULTI-SLOW-KAIST"
+train_base_path: "/media/pragyan/Data/racecar_ws/output/sequences/M-SOLO-SLOW-70-100/images/"
+test_base_path: "/media/pragyan/Data/racecar_ws/output/sequences/M-MULTI-SLOW-KAIST/images/"
 
 # Output directory
 output_dir: "results/netvlad"
 
 # Dataset settings
 camera_filter: "front_left_center"  # Filter by specific camera
-positive_threshold: 25.0  # GPS distance threshold for positive pairs (meters)
-negative_threshold: 50.0  # GPS distance threshold for negative pairs (meters)
+positive_threshold: 5.0  # GPS distance threshold for positive pairs (meters)
+negative_threshold: 25.0  # GPS distance threshold for negative pairs (meters)
 
 # Model settings
 num_clusters: 64  # Number of NetVLAD clusters
@@ -20,11 +20,12 @@ pretrained: true  # Use pretrained ResNet50
 vladv2: false  # Use NetVLAD v1
 
 # Training settings
-batch_size: 4  # Batch size for training
+batch_size: 8  # Batch size for training
 epochs: 50  # Number of training epochs
 learning_rate: 0.0001  # Initial learning rate
 weight_decay: 0.001  # Weight decay for regularization
 margin: 0.1  # Triplet loss margin
+num_workers: 4
 
 # Learning rate schedule
 lr_step_size: 10  # Epochs between LR reductions
@@ -37,3 +38,16 @@ patience: 20  # Early stopping patience (in eval_every units)
 
 # GPU settings
 device: "cuda"  # "cuda" or "cpu"
+
+# Evaluation settings
+recall_k_values: [1, 5, 10]
+distance_threshold: 5  # meters for evaluation
+
+# Output settings
+save_every_n_epochs: 10
+early_stopping_patience: 10
+log_interval: 100  # Log every N batches
+
+# Hardware settings
+mixed_precision: true
+gradient_accumulation_steps: 1
