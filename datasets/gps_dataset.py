@@ -283,7 +283,7 @@ def create_dataloaders(
 
 if __name__ == "__main__":
     # Example usage
-    train_csv = "/media/pragyan/Data/racecar_ws/output/sequences/M-SOLO-SLOW-70-100/poses/poses.csv"
+    train_csv = "/media/pragyan/Data/racecar_ws/output/sequences/M-SOLO-SLOW-70-100/poses/poses_minimal_coverage_0.5m.csv"
     test_csv = "/media/pragyan/Data/racecar_ws/output/sequences/M-MULTI-SLOW-KAIST/poses/poses.csv"
     
     # Extract base paths from CSV paths
