@@ -30,7 +30,7 @@ algorithm_settings:
     num_clusters: 64
     learning_rate: 0.0001
   
-  ap-gem:
+  apgem:
     batch_size: 16
     gem_p: 3.0
     learning_rate: 0.001

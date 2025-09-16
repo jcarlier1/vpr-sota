@@ -7,7 +7,7 @@ train_base_path: "/media/pragyan/Data/racecar_ws/output/sequences/M-SOLO-SLOW-70
 test_base_path: "/media/pragyan/Data/racecar_ws/output/sequences/M-MULTI-SLOW-KAIST/images/"
 
 # Output directory
-output_dir: "results/ap-gem"
+output_dir: "results/apgem"
 
 # Dataset settings
 camera_filter: "front_left_center"  # Filter by specific camera

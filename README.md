@@ -6,7 +6,7 @@ This project implements multiple State-of-the-Art (SOTA) Visual Place Recognitio
 
 ### ✅ Ready for Testing
 - **NetVLAD** (ResNet50 backbone) - Aggregated local descriptors with learnable clustering
-- **AP-GeM** (ResNet101 backbone) - Attention-based pooling with GeM pooling
+- **APGeM** (ResNet101 backbone) - Attention-based pooling with GeM pooling
 - **DELG** (ResNet50 backbone) - Global + local descriptors for enhanced place recognition
 - **CosPlace** (ResNet backbone) - Cosine-based place recognition with multi-scale pooling
 - **EigenPlaces** (ResNet backbone) - Eigenvalue-based features for viewpoint robustness
@@ -59,7 +59,7 @@ conda activate vpr-sota
 python experiments/run_experiments.py \
     --config configs/base_experiment_config.yaml \
     --output-dir experiments/results \
-    --algorithms netvlad ap-gem delg cosplace eigenplaces
+  --algorithms netvlad apgem delg cosplace eigenplaces
 ```
 
 #### Option 3: Run Individual Algorithms
@@ -68,7 +68,7 @@ python experiments/run_experiments.py \
 python algorithms/netvlad/train_netvlad.py --config configs/netvlad_config.yaml
 
 # AP-GeM
-python algorithms/ap-gem/train_apgem.py --config configs/apgem_config.yaml
+python algorithms/apgem/train_apgem.py --config configs/apgem_config.yaml
 
 # DELG
 python algorithms/delg/train_delg.py --config configs/delg_config.yaml
@@ -103,7 +103,7 @@ Individual algorithm configs in `configs/`:
 vpr-sota/
 ├── algorithms/              # Algorithm implementations
 │   ├── netvlad/            # NetVLAD implementation
-│   ├── ap-gem/             # AP-GeM implementation
+│   ├── apgem/             # AP-GeM implementation
 │   ├── delg/               # DELG implementation
 │   ├── cosplace/           # CosPlace implementation
 │   └── eigenplaces/        # EigenPlaces implementation
@@ -136,7 +136,7 @@ experiments/results/
 ├── experiment_results.json # Detailed results in JSON format
 ├── logs/                   # Detailed execution logs
 ├── netvlad/                # NetVLAD model and results
-├── ap-gem/                 # AP-GeM model and results
+├── apgem/                 # AP-GeM model and results
 ├── delg/                   # DELG model and results
 ├── cosplace/               # CosPlace model and results
 ├── eigenplaces/            # EigenPlaces model and results

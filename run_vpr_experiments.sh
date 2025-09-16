@@ -38,21 +38,24 @@ echo ""
 # Change to project directory
 cd "$PROJECT_DIR"
 
-# Check if we have the dataset files
-if [[ ! -f "data/train_dataset.csv" ]]; then
-    echo "Warning: Training dataset not found at data/train_dataset.csv"
+# Check if we have the dataset files specified in the config file
+TRAIN_CSV=$(grep '^train_csv:' "$CONFIG_FILE" | awk '{print $2}' | tr -d '"')
+TEST_CSV=$(grep '^test_csv:' "$CONFIG_FILE" | awk '{print $2}' | tr -d '"')
+
+if [[ ! -f "$TRAIN_CSV" ]]; then
+    echo "Warning: Training dataset not found at $TRAIN_CSV"
     echo "Please ensure your GPS-tagged dataset is properly configured"
 fi
 
-if [[ ! -f "data/test_dataset.csv" ]]; then
-    echo "Warning: Test dataset not found at data/test_dataset.csv"
+if [[ ! -f "$TEST_CSV" ]]; then
+    echo "Warning: Test dataset not found at $TEST_CSV"
     echo "Please ensure your GPS-tagged dataset is properly configured"
 fi
 
 echo ""
 
 # Available algorithms
-ALGORITHMS=("netvlad" "ap-gem" "delg" "cosplace" "eigenplaces")  # All implemented algorithms
+ALGORITHMS=("netvlad" "apgem" "delg" "cosplace" "eigenplaces")  # All implemented algorithms
 
 # Check which algorithms are available
 AVAILABLE_ALGORITHMS=()

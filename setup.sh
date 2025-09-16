@@ -13,7 +13,7 @@ conda activate vpr-sota
 
 # Create algorithm directories
 mkdir -p algorithms/netvlad
-mkdir -p algorithms/ap-gem
+mkdir -p algorithms/apgem
 mkdir -p algorithms/delg
 mkdir -p algorithms/cosplace
 mkdir -p algorithms/eigenplaces

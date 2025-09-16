@@ -19,7 +19,7 @@ import logging
 sys.path.append(str(Path(__file__).parent.parent.parent))
 
 from datasets.gps_dataset import create_datasets, create_dataloaders, TripletDataset
-from algorithms.ap_gem.apgem_model import (
+from algorithms.apgem.apgem_model import (
     create_apgem_model,
     extract_features,
     TripletLoss,

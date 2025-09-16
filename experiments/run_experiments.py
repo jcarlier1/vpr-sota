@@ -33,8 +33,8 @@ class VPRExperimentRunner:
                 'script': 'algorithms/netvlad/train_netvlad.py',
                 'config': 'configs/netvlad_config.yaml'
             },
-            'ap-gem': {
-                'script': 'algorithms/ap-gem/train_apgem.py',
+            'apgem': {
+                'script': 'algorithms/apgem/train_apgem.py',
                 'config': 'configs/apgem_config.yaml'
             },
             'delg': {
