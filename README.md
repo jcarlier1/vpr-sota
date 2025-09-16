@@ -157,7 +157,7 @@ experiments/results/
 - **Features**: 32,768-dimensional global descriptors
 - **Loss**: Triplet loss with hard negative mining
 
-### AP-GeM
+### APGeM
 - **Backbone**: ResNet101 (pretrained on ImageNet)
 - **Pooling**: Attention-weighted GeM pooling
 - **Features**: 2048-dimensional global descriptors
