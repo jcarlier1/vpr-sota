@@ -42,8 +42,9 @@ class GPSImageDataset(Dataset):
     
     def __init__(
         self,
-        csv_path: str,
-        base_path: str,
+        csv_path: Optional[str] = None,
+        csv_file: Optional[str] = None,
+        base_path: str = '',
         transform: Optional[transforms.Compose] = None,
         positive_threshold: float = 25.0,  # meters
         negative_threshold: float = 50.0,  # meters
@@ -58,7 +59,12 @@ class GPSImageDataset(Dataset):
             negative_threshold: Distance threshold for negative pairs (meters)
             camera_filter: Filter by specific camera (e.g., 'front_left_center')
         """
-        self.csv_path = csv_path
+        # support either csv_path or csv_file (some scripts use csv_file)
+        chosen_csv = csv_path if csv_path is not None else csv_file
+        if chosen_csv is None:
+            raise ValueError("GPSImageDataset requires 'csv_path' or 'csv_file' argument")
+
+        self.csv_path = chosen_csv
         self.base_path = Path(base_path)
         self.transform = transform
         self.positive_threshold = positive_threshold
