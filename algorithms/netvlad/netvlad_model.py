@@ -135,6 +135,10 @@ class NetVLADModel(nn.Module):
         self.num_clusters = num_clusters
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
+        # Ensure NetVLAD layer is on the same device as input
+        if self.pool.conv.weight.device != x.device:
+            self.pool.to(x.device)
+
         # Extract features using ResNet50
         x = self.encoder(x)
         

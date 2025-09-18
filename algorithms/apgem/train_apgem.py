@@ -146,11 +146,12 @@ def evaluate_model(model, train_dataset, test_dataset, device, logger):
     # Evaluate
     evaluator = VPREvaluator(distance_threshold=25.0, k_values=[1, 5, 10, 20])
     
+    # Use positional args to avoid keyword mismatches
     results = evaluator.evaluate(
-        query_features=test_features,
-        database_features=train_features,
-        query_gps=test_gps,
-        database_gps=train_gps
+        test_features,
+        train_features,
+        test_gps,
+        train_gps
     )
     
     print_evaluation_results(results)
