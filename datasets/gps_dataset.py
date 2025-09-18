@@ -69,9 +69,9 @@ class GPSImageDataset(Dataset):
         self.transform = transform
         self.positive_threshold = positive_threshold
         self.negative_threshold = negative_threshold
-        
+
         # Load and filter data
-        self.data = pd.read_csv(csv_path)
+        self.data = pd.read_csv(self.csv_path)
         if camera_filter:
             self.data = self.data[self.data['camera_id'] == camera_filter]
         

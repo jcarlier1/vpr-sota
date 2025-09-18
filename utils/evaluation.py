@@ -301,7 +301,7 @@ class VPREvaluator:
             metric=self.metric
         )
     
-    def evaluate(
+    def evaluate_all(
         self,
         all_features: np.ndarray,
         all_locations: List[Tuple[float, float]],

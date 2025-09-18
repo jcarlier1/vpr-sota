@@ -40,6 +40,11 @@ class NetVLAD(nn.Module):
 
     def init_params(self, clsts: np.ndarray, traindescs: np.ndarray):
         """Initialize parameters from clusters"""
+        # Ensure new parameters are allocated on the same device/dtype as existing module
+        current_weight = self.conv.weight
+        device = current_weight.device if current_weight is not None else torch.device('cpu')
+        dtype = current_weight.dtype if current_weight is not None else torch.float32
+
         if self.vladv2 == False:
             clstsAssign = clsts / np.linalg.norm(clsts, axis=1, keepdims=True)
             dots = np.dot(clstsAssign, traindescs.T)
@@ -47,9 +52,9 @@ class NetVLAD(nn.Module):
             dots = dots[::-1, :]  # sort, descending
 
             self.alpha = (-np.log(0.01) / np.mean(dots[0, :] - dots[1, :])).item()
-            self.centroids = nn.Parameter(torch.from_numpy(clsts))
+            self.centroids = nn.Parameter(torch.from_numpy(clsts).to(device=device, dtype=dtype))
             self.conv.weight = nn.Parameter(
-                torch.from_numpy(self.alpha * clstsAssign).unsqueeze(2).unsqueeze(3)
+                torch.from_numpy(self.alpha * clstsAssign).to(device=device, dtype=dtype).unsqueeze(2).unsqueeze(3)
             )
             self.conv.bias = None
         else:
@@ -59,7 +64,7 @@ class NetVLAD(nn.Module):
             dsSq = np.square(knn.kneighbors(clsts, 2)[1])
             del knn
             self.alpha = (-np.log(0.01) / np.mean(dsSq[:, 1] - dsSq[:, 0])).item()
-            self.centroids = nn.Parameter(torch.from_numpy(clsts))
+            self.centroids = nn.Parameter(torch.from_numpy(clsts).to(device=device, dtype=dtype))
             del clsts, dsSq
 
             self.conv.weight = nn.Parameter(
